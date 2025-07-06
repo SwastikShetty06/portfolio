@@ -39,7 +39,7 @@ function ImageBioSplit() {
           >
             <div className="profile-image-container">
               <img 
-                src="/swastik.jpg" 
+                src={`${process.env.PUBLIC_URL}/swastik.jpg`}
                 alt="Swastik Shetty" 
                 className="profile-image"
               />

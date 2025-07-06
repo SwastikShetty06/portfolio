@@ -11,7 +11,7 @@ function ResumeBlock() {
 
   const downloadResume = () => {
     const link = document.createElement('a');
-    link.href = '/swastikshettyresume.pdf';
+    link.href = `${process.env.PUBLIC_URL}/swastikshettyresume.pdf`;
     link.download = 'Swastik_Shetty_Resume.pdf';
     document.body.appendChild(link);
     link.click();
