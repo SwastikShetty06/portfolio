@@ -24,6 +24,18 @@ function ProjectCardList() {
       githubBackend: 'https://github.com/SwastikShetty06'
     },
     {
+      id: 'PT',
+title: 'Pet Tinder – Full Stack Pet Adoption Platform',
+      description: 'Swipe-based pet adoption app with JWT authentication, image uploads, smart matching, and community listings.',
+      tech: ['React.js', 'Tailwind CSS', 'Express.js', 'MongoDB', 'Node.js', 'Cloudinary'],
+      features: [
+        'Secure JWT authentication',
+        'Community-driven pet listings',
+        'Real-time notifications'
+      ],
+      github: 'https://github.com/SwastikShetty06/pet-tinder'
+    },
+    {
       id: 'FSW',
       title: 'Football Scores Website',
       description: 'A responsive web application providing real-time football scores, team statistics, and match schedules. Built with modern React patterns and featuring a clean, intuitive interface.',
@@ -37,18 +49,18 @@ function ProjectCardList() {
       live: 'https://footballscores-swastik.web.app/'
     },
     {
-      id: 'AW',
-      title: 'ACONEWS Website',
-      description: 'A modern news aggregation platform with categorized news articles, search functionality, and user-friendly interface. Features dynamic content loading and optimized performance.',
-      tech: ['React.js', 'Tailwind CSS', 'News API', 'Firebase Hosting'],
+      id: 'FSW',
+      title: 'Football Scores Website',
+      description: 'A responsive web application providing real-time football scores, team statistics, and match schedules. Built with modern React patterns and featuring a clean, intuitive interface.',
+      tech: ['React.js', 'Tailwind CSS', 'API Integration', 'Responsive Design'],
       features: [
-        'Categorized news articles',
-        'Advanced search functionality',
-        'Bookmark favorite articles'
+        'Real-time score updates',
+        'Team statistics dashboard',
+        'Match schedules and fixtures'
       ],
-      github: 'https://github.com/SwastikShetty06/s-news',
-      live: 'https://news-app-06.web.app/'
-    }
+      github: 'https://github.com/SwastikShetty06/FootballScores',
+      live: 'https://footballscores-swastik.web.app/'
+    },
   ];
 
   return (

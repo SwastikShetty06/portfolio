@@ -52,7 +52,7 @@ function HeroHeader() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            Building fast, scalable, elegant solutions using React and Spring Boot.
+            Passionate Full Stack Developer skilled in React.js and Java, crafting optimized web and mobile apps.
           </motion.p>
           
           <motion.div 
