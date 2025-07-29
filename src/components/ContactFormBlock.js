@@ -1,14 +1,60 @@
 import React, { useState, useRef } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
+import LoadingAnimation from './LoadingAnimation';
 import './ContactFormBlock.css';
 
 function ContactFormBlock() {
   const [ref, inView] = useInView({
-    threshold: 0.3,
+    threshold: 0.2,
     triggerOnce: true
   });
+
+  // Animation variants
+  const formVariants = {
+    hidden: { opacity: 0, x: -50, scale: 0.95 },
+    visible: { 
+      opacity: 1, 
+      x: 0, 
+      scale: 1,
+      transition: {
+        type: "spring",
+        damping: 20,
+        stiffness: 100,
+        delay: 0.2
+      }
+    }
+  };
+
+  const socialVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: {
+        type: "spring",
+        damping: 15,
+        stiffness: 100,
+        delay: 0.4,
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const socialItemVariants = {
+    hidden: { opacity: 0, y: 20, scale: 0.8 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1,
+      transition: {
+        type: "spring",
+        damping: 20,
+        stiffness: 200
+      }
+    }
+  };
 
   const formRef = useRef();
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -57,9 +103,9 @@ function ContactFormBlock() {
         <div className="contact-content grid grid-2">
           <motion.div
             className="form-section"
-            initial={{ opacity: 0, x: -50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            variants={formVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
           >
             <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
               <div className="form-group">
@@ -99,29 +145,80 @@ function ContactFormBlock() {
                 type="submit" 
                 className="btn btn-primary submit-btn"
                 disabled={isSubmitting}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)" }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                <AnimatePresence mode="wait">
+                  {isSubmitting ? (
+                    <motion.div
+                      key="loading"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="button-content"
+                    >
+                      <LoadingAnimation size={20} message="" />
+                      Sending...
+                    </motion.div>
+                  ) : (
+                    <motion.span
+                      key="send"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                    >
+                      Send Message
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </motion.button>
               
-              {submitStatus === 'success' && (
-                <div className="status-message success">Message sent successfully! 🎉</div>
-              )}
-              {submitStatus === 'error' && (
-                <div className="status-message error">Failed to send message. Please try again.</div>
-              )}
+              <AnimatePresence>
+                {submitStatus === 'success' && (
+                  <motion.div 
+                    className="status-message success"
+                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  >
+                    Message sent successfully! 🎉
+                  </motion.div>
+                )}
+                {submitStatus === 'error' && (
+                  <motion.div 
+                    className="status-message error"
+                    initial={{ opacity: 0, y: 10, scale: 0.9 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -10, scale: 0.9 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  >
+                    Failed to send message. Please try again.
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </form>
           </motion.div>
           
           <motion.div
             className="social-section"
-            initial={{ opacity: 0, x: 50 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            variants={socialVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
           >
-            <h3 className="mb-3">Connect with me</h3>
-            <div className="social-links">
+            <motion.h3 
+              className="mb-3"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ delay: 0.5, duration: 0.6 }}
+            >
+              Connect with me
+            </motion.h3>
+            <motion.div 
+              className="social-links"
+              variants={socialVariants}
+            >
               {socialLinks.map((link, index) => (
                 <motion.a
                   key={link.name}
@@ -129,15 +226,19 @@ function ContactFormBlock() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="social-link hover-lift"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={inView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                  variants={socialItemVariants}
+                  whileHover={{ 
+                    scale: 1.1, 
+                    rotate: 5,
+                    transition: { type: "spring", stiffness: 400, damping: 10 }
+                  }}
+                  whileTap={{ scale: 0.95 }}
                 >
                   <span className="social-icon">{link.icon}</span>
                   <span className="social-name">{link.name}</span>
                 </motion.a>
               ))}
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

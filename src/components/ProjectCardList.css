@@ -2,32 +2,57 @@
   padding: 2rem 0;
 }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-bottom: 3rem;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
+/* Modern card stacking layout - cards stack on top of each other */
+.projects-stack {
+  position: relative;
+  margin: 5rem auto;
+  max-width: 800px;
+  padding: 0 2rem;
+  /* Height should accommodate all stacked cards showing only headers */
+  min-height: calc(400px + (3 * 120px));
+}
+
+/* Modern solid stacking cards */
+.project-card-stack {
+  background: var(--bg-primary);
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15), 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  border: 2px solid var(--border-color);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 400px;
+}
+
+.project-card-stack:hover {
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
 }
 
 .project-card {
-  background: rgba(54, 116, 181, 0.05);
-  border-radius: 12px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: var(--radius-2xl);
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(54, 116, 181, 0.12);
-  transition: all 0.3s ease;
-  border: 1px solid rgba(54, 116, 181, 0.1);
+  box-shadow: 0 8px 32px var(--shadow), 0 2px 8px var(--shadow);
+  transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  border: 1px solid var(--glass-border);
   height: 520px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .project-card:hover {
-  transform: scale(1.05) rotateX(5deg) rotateY(5deg);
-  box-shadow: 0 20px 40px rgba(54, 116, 181, 0.25);
-  border-color: var(--golden);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 48px var(--shadow), 0 8px 16px var(--shadow);
+  border-color: var(--accent-primary);
+  background: var(--bg-tertiary);
 }
 
 .project-header {
@@ -53,18 +78,17 @@
 }
 
 .project-title {
-  color: var(--indigo);
-  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-size: var(--font-lg);
   font-weight: 600;
-  margin-bottom: 0.75rem;
+  margin-bottom: var(--space-sm);
 }
 
 .project-description {
-  color: var(--indigo);
-  font-size: 0.85rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-  opacity: 0.8;
+  color: var(--text-secondary);
+  font-size: var(--font-sm);
+  line-height: 1.6;
+  margin-bottom: var(--space-md);
 }
 
 .tech-stack {
@@ -75,13 +99,25 @@
 }
 
 .tech-badge {
-  background: rgba(54, 116, 181, 0.1);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
   color: var(--indigo);
-  padding: 0.25rem 0.6rem;
-  border-radius: 10px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  border: 1px solid rgba(54, 116, 181, 0.2);
+  padding: 0.4rem 0.8rem;
+  border-radius: 16px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: default;
+}
+
+.tech-badge:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .key-features {
@@ -128,31 +164,32 @@
 .btn-demo {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  padding: 0.6rem 0.8rem;
-  border-radius: 12px;
+  gap: 0.4rem;
+  padding: 0.75rem 1rem;
+  border-radius: 16px;
   text-decoration: none;
   font-size: 0.8rem;
   font-weight: 700;
-  transition: transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1), box-shadow 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   border: 2px solid;
   flex: 1;
   justify-content: center;
   white-space: nowrap;
-  background: linear-gradient(135deg, var(--indigo), var(--sky-blue));
-  color: white;
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
 }
 
 .btn-code:hover,
 .btn-demo:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .btn-code {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.1);
   color: var(--indigo);
-  border-color: var(--indigo);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .btn-code:hover {
@@ -161,9 +198,9 @@
 }
 
 .btn-demo {
-  background: var(--indigo);
+  background: linear-gradient(135deg, var(--indigo), var(--sky-blue));
   color: white;
-  border-color: var(--indigo);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .btn-demo:hover {
@@ -183,13 +220,16 @@
 }
 
 .cta-content {
-  background: rgba(54, 116, 181, 0.05);
-  padding: 1.5rem;
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  padding: 2rem;
+  border-radius: 24px;
   text-align: center;
-  box-shadow: 0 6px 20px rgba(54, 116, 181, 0.12);
-  border: 1px solid rgba(54, 116, 181, 0.1);
-  max-width: 400px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  max-width: 500px;
+  transition: all 0.3s ease;
 }
 
 .cta-content h3 {
@@ -226,31 +266,16 @@
   transform: translateY(-2px);
 }
 
-/* Mobile styles */
-@media (max-width: 1200px) {
-  .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-  }
-}
-
-@media (max-width: 900px) {
-  .projects-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-  }
-}
-
+/* Responsive styles for stacking layout */
 @media (max-width: 768px) {
-  .projects-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  .projects-stack {
+    max-width: 100%;
+    padding: 0 1rem;
+    min-height: calc(350px + (3 * 60px));
   }
   
-  .project-card {
-    margin: 0 1rem;
-    height: auto;
-    min-height: 480px;
+  .project-card-stack {
+    min-height: 350px;
   }
   
   .project-header {
@@ -282,13 +307,21 @@
 }
 
 @media (max-width: 480px) {
-  .project-card {
-    margin: 0;
-    min-height: 450px;
+  .projects-stack {
+    padding: 0 0.5rem;
+    min-height: calc(320px + (3 * 50px));
+  }
+  
+  .project-card-stack {
+    min-height: 320px;
   }
   
   .project-header {
     padding: 1rem;
+  }
+  
+  .project-id {
+    font-size: 1.5rem;
   }
   
   .project-content {

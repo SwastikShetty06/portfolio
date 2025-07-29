@@ -4,7 +4,7 @@ import './Navbar.css';
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
 
   const navItems = [
     { id: 'hero', label: 'Home' },
@@ -18,8 +18,13 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show navbar after scrolling down a bit
-      setIsVisible(window.scrollY > 100);
+      const scrollPos = window.scrollY;
+      // Fade in and out navbar based on scroll
+      if (scrollPos > 100) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
 
       // Update active section based on scroll position
       const sections = navItems.map(item => {
@@ -63,7 +68,11 @@ function Navbar() {
         opacity: isVisible ? 1 : 0, 
         y: isVisible ? 0 : -50 
       }}
-      transition={{ duration: 0.3 }}
+      transition={{
+        type: 'spring',
+        stiffness: 260,
+        damping: 20
+      }}
     >
       <div className="nav-container">
         <ul className="nav-list">

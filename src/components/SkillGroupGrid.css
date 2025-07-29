@@ -14,25 +14,38 @@
 }
 
 .skill-card {
-  background: rgba(54, 116, 181, 0.05);
-  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border-radius: 24px;
   padding: 2rem;
   text-align: center;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
+  position: relative;
+  overflow: hidden;
 }
 
 .skill-card:hover {
-  border-color: var(--golden);
-  background: rgba(54, 116, 181, 0.1);
-  box-shadow: 0 10px 30px rgba(54, 116, 181, 0.15);
-  transform: translateY(-5px);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2), 0 6px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-8px) scale(1.02);
 }
 
 .skill-icon {
   font-size: 3rem;
   margin-bottom: 1rem;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
+}
+
+.skill-lottie-icon {
+  width: 60px;
+  height: 60px;
+  filter: drop-shadow(0 4px 8px rgba(59, 130, 246, 0.3));
 }
 
 .skill-category {
@@ -49,19 +62,23 @@
 }
 
 .skill-badge {
-  background: var(--golden);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
   color: var(--indigo);
   padding: 0.5rem 1rem;
   border-radius: 20px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  text-transform: capitalize;
 }
 
 .skill-badge:hover {
   background: var(--indigo);
-  color: var(--cream);
-  transform: translateY(-2px);
+  color: white;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 @media (max-width: 768px) {

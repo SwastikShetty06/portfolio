@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
+import Lottie from 'lottie-react';
+import reactIcon from '../assets/animations/react-icon.json';
 import './SkillGroupGrid.css';
 
 function SkillGroupGrid() {
@@ -13,37 +15,44 @@ function SkillGroupGrid() {
     {
       category: 'Languages',
       skills: ['Java', 'JavaScript', 'Python', 'Dart', 'C++'],
-      icon: '💻'
+      icon: '💻',
+      type: 'emoji'
     },
     {
       category: 'Frontend',
       skills: ['React.js', 'HTML', 'CSS', 'Tailwind', 'Material UI'],
-      icon: '🎨'
+      icon: reactIcon,
+      type: 'lottie'
     },
     {
       category: 'Backend',
       skills: ['Spring Boot', 'Node.js', 'Express.js'],
-      icon: '⚙️'
+      icon: '⚙️',
+      type: 'emoji'
     },
     {
       category: 'Mobile',
       skills: ['Flutter', 'React Native'],
-      icon: '📱'
+      icon: '📱',
+      type: 'emoji'
     },
     {
       category: 'Databases',
       skills: ['MySQL', 'PostgreSQL', 'MongoDB'],
-      icon: '🗄️'
+      icon: '🗄️',
+      type: 'emoji'
     },
     {
       category: 'Tools',
       skills: ['Git', 'Postman', 'IntelliJ IDEA', 'VS Code'],
-      icon: '🔧'
+      icon: '🔧',
+      type: 'emoji'
     },
     {
       category: 'Soft Skills',
       skills: ['Problem Solving', 'Debugging', 'Team Collaboration'],
-      icon: '🤝'
+      icon: '🤝',
+      type: 'emoji'
     }
   ];
 
@@ -69,7 +78,17 @@ function SkillGroupGrid() {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.1 }}
             >
-              <div className="skill-icon">{group.icon}</div>
+              <div className="skill-icon">
+                {group.type === 'lottie' ? (
+                  <Lottie 
+                    animationData={group.icon} 
+                    className="skill-lottie-icon"
+                    loop={true}
+                  />
+                ) : (
+                  group.icon
+                )}
+              </div>
               <h3 className="skill-category">{group.category}</h3>
               <div className="skill-list">
                 {group.skills.map((skill, skillIndex) => (

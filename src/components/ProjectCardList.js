@@ -5,9 +5,25 @@ import './ProjectCardList.css';
 
 function ProjectCardList() {
   const [ref, inView] = useInView({
-    threshold: 0.3,
+    threshold: 0.2,
     triggerOnce: true
   });
+
+  // Animation variants for staggered effects
+  const titleVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: {
+        type: "spring",
+        damping: 25,
+        stiffness: 120,
+        duration: 0.8
+      }
+    }
+  };
+
 
   const projects = [
     {
@@ -68,22 +84,66 @@ title: 'Pet Tinder – Full Stack Pet Adoption Platform',
       <div className="container">
         <motion.div
           className="section-header text-center mb-5"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
+          variants={titleVariants}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
         >
-          <h2>Featured Projects</h2>
-          <p>Some of my recent work and personal projects</p>
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={inView ? { opacity: 1, scale: 1 } : {}}
+            transition={{ type: "spring", damping: 15, stiffness: 200, delay: 0.2 }}
+          >
+            Featured Projects
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={inView ? { opacity: 1, y: 0 } : {}}
+            transition={{ delay: 0.4, duration: 0.6 }}
+          >
+            Some of my recent work and personal projects
+          </motion.p>
         </motion.div>
         
-        <div className="projects-grid">
+        <div className="projects-stack">
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="project-card"
-              initial={{ opacity: 0, y: 50 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              className="project-card-stack"
+              style={{
+                zIndex: index + 1,
+                marginTop: index === 0 ? 0 : 
+                  window.innerWidth <= 480 ? `-240px` : 
+                  window.innerWidth <= 768 ? `-260px` : `-280px`
+              }}
+              initial={{ 
+                opacity: 0, 
+                y: 100,
+                scale: 0.9
+              }}
+              whileInView={{ 
+                opacity: 1, 
+                y: 0,
+                scale: 1 - (index * 0.02)
+              }}
+              transition={{ 
+                duration: 0.8, 
+                delay: index * 0.15,
+                type: "spring",
+                damping: 30,
+                stiffness: 100
+              }}
+              viewport={{ once: true, amount: 0.2 }}
+              whileHover={{ 
+                scale: 1,
+                y: -20,
+                zIndex: 1000,
+                transition: { 
+                  type: "spring", 
+                  stiffness: 300, 
+                  damping: 20,
+                  duration: 0.3
+                }
+              }}
             >
               <div className="project-header">
                 <h3 className="project-id">{project.id}</h3>

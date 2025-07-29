@@ -8,16 +8,20 @@
 }
 
 .contact-form {
-  background: rgba(54, 116, 181, 0.05);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
   padding: 2rem;
-  border-radius: 16px;
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .contact-form:hover {
-  border-color: var(--golden);
-  background: rgba(54, 116, 181, 0.08);
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
 }
 
 .form-group {
@@ -35,30 +39,43 @@
 .form-group textarea {
   width: 100%;
   padding: 1rem;
-  border: 2px solid rgba(54, 116, 181, 0.2);
-  border-radius: 8px;
-  background: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--indigo);
   font-family: inherit;
   font-size: 1rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
   border-color: var(--indigo);
-  box-shadow: 0 0 0 3px rgba(54, 116, 181, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.2), 0 0 0 3px rgba(59, 130, 246, 0.1);
+  transform: translateY(-1px);
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
   color: var(--indigo);
+  opacity: 0.6;
 }
 
 .submit-btn {
   width: 100%;
   margin-top: 1rem;
+}
+
+.button-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
 .status-message {
@@ -97,20 +114,23 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem 1.5rem;
-  background: rgba(54, 116, 181, 0.05);
-  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 20px;
   text-decoration: none;
   color: var(--indigo);
-  border: 2px solid transparent;
-  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
 }
 
 .social-link:hover {
-  background: rgba(54, 116, 181, 0.1);
-  border-color: var(--golden);
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
   color: var(--indigo);
-  box-shadow: 0 5px 15px rgba(54, 116, 181, 0.2);
-  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-4px) scale(1.02);
 }
 
 .social-icon {
