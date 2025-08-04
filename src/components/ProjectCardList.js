@@ -3,193 +3,94 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import './ProjectCardList.css';
 
+const projects = [
+  {
+    id: 'NSA',
+    title: 'Notes Sharing App',
+    description: 'Mobile app for note sharing with real-time sync, offline access, and Spring Boot backend.',
+    tech: ['Flutter', 'Spring Boot', 'PostgreSQL'],
+    features: ['Real-time synchronization', 'User authentication', 'Offline access'],
+    github: 'https://github.com/SwastikShetty06'
+  },
+  {
+    id: 'PT',
+    title: 'Pet Tinder',
+    description: 'Swipe-based pet adoption platform with JWT auth, cloud image uploads, and smart matching.',
+    tech: ['React.js', 'Express.js', 'MongoDB', 'Cloudinary'],
+    features: ['JWT Authentication', 'Swipe functionality', 'Cloudinary uploads'],
+    github: 'https://github.com/SwastikShetty06/pet-tinder'
+  },
+  {
+    id: 'FSW',
+    title: 'Football Scores Website',
+    description: 'Web app showing real-time football scores, stats and match schedules.',
+    tech: ['React.js', 'Tailwind CSS', 'API Integration'],
+    features: ['Live scores', 'Team dashboards', 'Schedule tracking'],
+    github: 'https://github.com/SwastikShetty06/FootballScores',
+    live: 'https://footballscores-swastik.web.app/'
+  },
+  {
+    id: 'ND',
+    title: 'News Dashboard',
+    description: 'Dashboard delivering trending news with filtering by category and source.',
+    tech: ['React.js', 'Bootstrap', 'Tailwind CSS'],
+    features: ['Responsive cards', 'Category filtering', 'Live news data'],
+    github: 'https://github.com/SwastikShetty06/s-news',
+    live: 'https://news-app-06.web.app/'
+  },
+];
+
 function ProjectCardList() {
-  const [ref, inView] = useInView({
-    threshold: 0.2,
-    triggerOnce: true
-  });
-
-  // Animation variants for staggered effects
-  const titleVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        type: "spring",
-        damping: 25,
-        stiffness: 120,
-        duration: 0.8
-      }
-    }
-  };
-
-
-  const projects = [
-    {
-      id: 'NSA',
-      title: 'Notes Sharing App',
-      description: 'A comprehensive mobile application for sharing and managing notes with real-time synchronization. Include user authentication, note categorization, sharing capabilities, and offline support.',
-      tech: ['Flutter', 'Spring Boot', 'PostgreSQL', 'REST API'],
-      features: [
-        'Real-time note synchronization',
-        'User authentication system',
-        'Offline note access'
-      ],
-      githubFrontend: 'https://github.com/SwastikShetty06',
-      githubBackend: 'https://github.com/SwastikShetty06'
-    },
-    {
-      id: 'PT',
-title: 'Pet Tinder – Full Stack Pet Adoption Platform',
-      description: 'Swipe-based pet adoption app with JWT authentication, image uploads, smart matching, and community listings.',
-      tech: ['React.js', 'Tailwind CSS', 'Express.js', 'MongoDB', 'Node.js', 'Cloudinary'],
-      features: [
-        'Secure JWT authentication',
-        'Community-driven pet listings',
-        'Real-time notifications'
-      ],
-      github: 'https://github.com/SwastikShetty06/pet-tinder'
-    },
-    {
-      id: 'FSW',
-      title: 'Football Scores Website',
-      description: 'A responsive web application providing real-time football scores, team statistics, and match schedules. Built with modern React patterns and featuring a clean, intuitive interface.',
-      tech: ['React.js', 'Tailwind CSS', 'API Integration', 'Responsive Design'],
-      features: [
-        'Real-time score updates',
-        'Team statistics dashboard',
-        'Match schedules and fixtures'
-      ],
-      github: 'https://github.com/SwastikShetty06/FootballScores',
-      live: 'https://footballscores-swastik.web.app/'
-    },
-    {
-      id: 'FSW',
-      title: 'Football Scores Website',
-      description: 'A responsive web application providing real-time football scores, team statistics, and match schedules. Built with modern React patterns and featuring a clean, intuitive interface.',
-      tech: ['React.js', 'Tailwind CSS', 'API Integration', 'Responsive Design'],
-      features: [
-        'Real-time score updates',
-        'Team statistics dashboard',
-        'Match schedules and fixtures'
-      ],
-      github: 'https://github.com/SwastikShetty06/FootballScores',
-      live: 'https://footballscores-swastik.web.app/'
-    },
-  ];
+  const [ref, inView] = useInView({ threshold: 0.2, triggerOnce: true });
 
   return (
     <div className="project-card-list" ref={ref}>
       <div className="container">
         <motion.div
           className="section-header text-center mb-5"
-          variants={titleVariants}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, ease: 'easeOut' }}
         >
-          <motion.h2
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={inView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ type: "spring", damping: 15, stiffness: 200, delay: 0.2 }}
-          >
-            Featured Projects
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={inView ? { opacity: 1, y: 0 } : {}}
-            transition={{ delay: 0.4, duration: 0.6 }}
-          >
-            Some of my recent work and personal projects
-          </motion.p>
+          <h2 className="font-display text-accent">Featured Projects</h2>
+          <p className="text-muted">Scroll to explore and hover to reveal details</p>
         </motion.div>
-        
-        <div className="projects-stack">
+
+        <div className="projects-grid">
           {projects.map((project, index) => (
             <motion.div
-              key={project.title}
-              className="project-card-stack"
-              style={{
-                zIndex: index + 1,
-                marginTop: index === 0 ? 0 : 
-                  window.innerWidth <= 480 ? `-240px` : 
-                  window.innerWidth <= 768 ? `-260px` : `-280px`
-              }}
-              initial={{ 
-                opacity: 0, 
-                y: 100,
-                scale: 0.9
-              }}
-              whileInView={{ 
-                opacity: 1, 
-                y: 0,
-                scale: 1 - (index * 0.02)
-              }}
-              transition={{ 
-                duration: 0.8, 
-                delay: index * 0.15,
-                type: "spring",
-                damping: 30,
-                stiffness: 100
-              }}
-              viewport={{ once: true, amount: 0.2 }}
-              whileHover={{ 
-                scale: 1,
-                y: -20,
-                zIndex: 1000,
-                transition: { 
-                  type: "spring", 
-                  stiffness: 300, 
-                  damping: 20,
-                  duration: 0.3
-                }
-              }}
+              className="project-card"
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ delay: index * 0.1, duration: 0.6, ease: 'easeOut' }}
             >
-              <div className="project-header">
-                <h3 className="project-id">{project.id}</h3>
-              </div>
-              
-              <div className="project-content">
-                <h4 className="project-title">{project.title}</h4>
-                <p className="project-description">{project.description}</p>
-                
+              <div className="card-front">
+                <h3 className="project-title">{project.title}</h3>
+                <p className="project-desc">{project.description}</p>
                 <div className="tech-stack">
-                  {project.tech.map((tech, techIndex) => (
-                    <span key={tech} className="tech-badge">{tech}</span>
+                  {project.tech.map((tech, idx) => (
+                    <span className="tech-badge" key={idx}>{tech}</span>
                   ))}
                 </div>
-                
-                <div className="key-features">
-                  <h5>Key Features:</h5>
-                  <ul className="features-list">
-                    {project.features.map((feature, featureIndex) => (
-                      <li key={featureIndex}>{feature}</li>
-                    ))}
-                  </ul>
-                </div>
-                
+              </div>
+              <div className="card-details">
+                <ul className="feature-list">
+                  {project.features.map((f, i) => (
+                    <li key={i}>{f}</li>
+                  ))}
+                </ul>
                 <div className="project-links">
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-code">
-                      <span className="btn-icon">👨‍💻</span> CODE
-                    </a>
-                  )}
-                  {project.githubFrontend && (
-                    <a href={project.githubFrontend} target="_blank" rel="noopener noreferrer" className="btn btn-code">
-                      <span className="btn-icon">👨‍💻</span> CODE
-                    </a>
-                  )}
+                  <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-outline">👨‍💻 GitHub</a>
                   {project.live && (
-                    <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn btn-demo">
-                      <span className="btn-icon">🔗</span> LIVE DEMO
-                    </a>
+                    <a href={project.live} target="_blank" rel="noreferrer" className="btn btn-primary">🔗 Live</a>
                   )}
                 </div>
               </div>
             </motion.div>
           ))}
         </div>
-        
         <motion.div
           className="github-cta"
           initial={{ opacity: 0, y: 30 }}
