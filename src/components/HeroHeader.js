@@ -2,14 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Lottie from 'lottie-react';
 import codingAnimation from '../assets/animations/coding-animation.json';
-import reactIcon from '../assets/animations/react-icon.json';
+import heroLottie from '../assets/animations/hero-lottie.json'; // NEW: Your animation
 import './HeroHeader.css';
 
 function HeroHeader() {
-  // Debug: Log animation data
-  console.log('Coding animation data:', codingAnimation);
-  console.log('Animation data type:', typeof codingAnimation);
-  
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -84,50 +80,23 @@ function HeroHeader() {
               </button>
             </motion.div>
           </motion.div>
-          
-          {/* Right side - 3D Floating Logos */}
+
+          {/* Right side - Lottie Animation */}
           <motion.div 
             className="hero-animation"
             initial={{ opacity: 0, x: 50, scale: 0.8 }}
             animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{ duration: 1, delay: 0.5 }}
           >
-            <div className="floating-logos-container">
-              <div className="floating-logo js-logo">
-                <span className="logo-text">JS</span>
-              </div>
-              
-              <div className="floating-logo java-logo">
-                <span className="logo-icon">☕</span>
-              </div>
-              
-              <div className="floating-logo spring-logo">
-                <span className="logo-text">Spring</span>
-              </div>
-              
-              <div className="floating-logo react-logo">
-                <span className="logo-icon">⚛️</span>
-              </div>
-              
-              <div className="floating-logo node-logo">
-                <span className="logo-text">Node</span>
-              </div>
-              
-              <div className="floating-logo html-logo">
-                <span className="logo-text">HTML</span>
-              </div>
-              
-              <div className="floating-logo css-logo">
-                <span className="logo-text">CSS</span>
-              </div>
-              
-              <div className="floating-logo postgres-logo">
-                <span className="logo-text">PostgreSQL</span>
-              </div>
-            </div>
+            <Lottie 
+              animationData={heroLottie} 
+              loop 
+              autoplay 
+              style={{ width: '100%', height: '100%' }}
+            />
           </motion.div>
         </div>
-        
+
         <motion.div 
           className="scroll-indicator"
           initial={{ opacity: 0 }}
