@@ -93,20 +93,46 @@
 }
 
 /* Mobile styles */
+@media (max-width: 1024px) {
+  .image-bio-split {
+    padding: 3rem 0;
+  }
+  
+  .split-content {
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 768px) {
+  .image-bio-split {
+    padding: 2rem 0;
+  }
+  
   .split-content {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    gap: 2rem;
     text-align: center;
   }
   
   .profile-image-container {
     width: 250px;
     height: 250px;
+    margin: 0 auto;
   }
   
   .bio-text {
     font-size: 1.1rem;
+    text-align: left;
+  }
+  
+  .bio-section h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .education-timeline h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
   }
   
   .timeline-item:hover {
@@ -115,12 +141,33 @@
 }
 
 @media (max-width: 480px) {
+  .image-bio-split {
+    padding: 1.5rem 0;
+  }
+  
+  .split-content {
+    gap: 1.5rem;
+  }
+  
   .profile-image-container {
     width: 200px;
     height: 200px;
   }
   
+  .bio-text {
+    font-size: 1rem;
+  }
+  
   .timeline-item {
     padding: 1rem;
+    margin-bottom: 0.8rem;
+  }
+  
+  .timeline-degree {
+    font-size: 1.1rem;
+  }
+  
+  .timeline-institution {
+    font-size: 0.9rem;
   }
 }

@@ -7,13 +7,13 @@ function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
 
   const navItems = [
-    { id: 'hero', label: 'Home' },
-    { id: 'about', label: 'About' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'certificates', label: 'Certificates' },
-    { id: 'resume', label: 'Resume' },
-    { id: 'contact', label: 'Contact' }
+    { id: 'hero', label: 'Home', mobileLabel: 'Home' },
+    { id: 'about', label: 'About', mobileLabel: 'About' },
+    { id: 'skills', label: 'Skills', mobileLabel: 'Skills' },
+    { id: 'projects', label: 'Projects', mobileLabel: 'Work' },
+    { id: 'certificates', label: 'Certificates', mobileLabel: 'Cert' },
+    { id: 'resume', label: 'Resume', mobileLabel: 'CV' },
+    { id: 'contact', label: 'Contact', mobileLabel: 'Talk' }
   ];
 
   useEffect(() => {
@@ -82,7 +82,8 @@ function Navbar() {
                 className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
                 onClick={() => scrollToSection(item.id)}
               >
-                {item.label}
+                <span className="nav-label-desktop">{item.label}</span>
+                <span className="nav-label-mobile">{item.mobileLabel}</span>
               </button>
             </li>
           ))}
