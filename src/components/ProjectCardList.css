@@ -75,12 +75,12 @@
 }
 
 .tech-badge {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.2);
   border: 1px solid var(--glass-border);
   padding: 0.4rem 0.8rem;
   border-radius: var(--radius-full);
   font-size: 0.75rem;
-  color: var(--indigo);
+  color: #fff;
   font-weight: 500;
 }
 
