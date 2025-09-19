@@ -1,18 +1,16 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import loadingSpinner from '../assets/animations/loading-spinner.json';
-import './LoadingAnimation.css';
-
 function LoadingAnimation({ size = 100, message = "Loading..." }) {
   return (
-    <div className="loading-container">
+    <div className="flex flex-col items-center justify-center p-8">
       <Lottie 
         animationData={loadingSpinner} 
-        className="loading-animation"
+        className="drop-shadow-lg"
         style={{ width: size, height: size }}
         loop={true}
       />
-      {message && <p className="loading-message">{message}</p>}
+      {message && <p className="mt-4 text-base text-indigo/80 font-medium text-center">{message}</p>}
     </div>
   );
 }

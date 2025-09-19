@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import './Navbar.css';
-
 function Navbar() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isVisible, setIsVisible] = useState(true);
@@ -60,9 +58,13 @@ function Navbar() {
     }
   };
 
+  const navLinkClasses = (itemId) =>
+    `bg-transparent border-none text-indigo text-sm font-medium px-3 md:px-5 py-2 md:py-3 rounded-full cursor-pointer transition-all duration-300 ease-in-out whitespace-nowrap hover:bg-indigo-100/50 hover:text-sky-blue flex-1 md:flex-none text-center
+    ${activeSection === itemId ? 'bg-indigo text-white shadow-md hover:bg-sky-blue' : ''}`;
+
   return (
     <motion.nav 
-      className={`navbar ${isVisible ? 'visible' : ''}`}
+      className="fixed top-4 right-4 left-4 md:left-auto md:w-auto z-50 bg-cream/95 backdrop-blur-md rounded-full p-1 md:p-2 shadow-lg border border-indigo-100"
       initial={{ opacity: 0, y: -50 }}
       animate={{ 
         opacity: isVisible ? 1 : 0, 
@@ -74,16 +76,16 @@ function Navbar() {
         damping: 20
       }}
     >
-      <div className="nav-container">
-        <ul className="nav-list">
+      <div className="flex items-center">
+        <ul className="flex list-none m-0 p-0 gap-1 md:gap-2 w-full">
           {navItems.map((item) => (
-            <li key={item.id}>
+            <li key={item.id} className="flex-1 md:flex-none">
               <button
-                className={`nav-link ${activeSection === item.id ? 'active' : ''}`}
+                className={navLinkClasses(item.id)}
                 onClick={() => scrollToSection(item.id)}
               >
-                <span className="nav-label-desktop">{item.label}</span>
-                <span className="nav-label-mobile">{item.mobileLabel}</span>
+                <span className="hidden md:inline">{item.label}</span>
+                <span className="inline md:hidden text-xs">{item.mobileLabel}</span>
               </button>
             </li>
           ))}

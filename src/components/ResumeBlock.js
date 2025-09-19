@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import './ResumeBlock.css';
-
 function ResumeBlock() {
   const [ref, inView] = useInView({
     threshold: 0.3,
@@ -19,22 +17,22 @@ function ResumeBlock() {
   };
 
   return (
-    <div className="resume-block" ref={ref}>
-      <div className="container">
+    <div className="py-16 md:py-24" ref={ref}>
+      <div className="container mx-auto">
         <motion.div
-          className="resume-content text-center"
+          className="max-w-xl mx-auto text-center"
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2 className="mb-4">Resume</h2>
-          <p className="mb-5">
+          <h2 className="text-3xl md:text-4xl font-bold text-indigo mb-4">Resume</h2>
+          <p className="text-lg text-indigo/80 leading-relaxed mb-8">
             Download my complete resume to learn more about my experience, 
             education, and technical skills.
           </p>
           
           <motion.button
-            className="btn btn-primary btn-large hover-lift"
+            className="btn btn-primary px-8 md:px-12 py-3 md:py-5 text-base md:text-lg font-semibold hover-lift"
             onClick={downloadResume}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

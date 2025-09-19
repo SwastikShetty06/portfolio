@@ -3,8 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import emailjs from '@emailjs/browser';
 import LoadingAnimation from './LoadingAnimation';
-import './ContactFormBlock.css';
-
 function ContactFormBlock() {
   const [ref, inView] = useInView({
     threshold: 0.2,
@@ -88,62 +86,65 @@ function ContactFormBlock() {
   ];
 
   return (
-    <div className="contact-form-block" ref={ref}>
-      <div className="container">
+    <div className="py-16 md:py-24" ref={ref}>
+      <div className="container mx-auto">
         <motion.div
-          className="section-header text-center mb-5"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
         >
-          <h2>Let's build something together</h2>
-          <p>Ready to collaborate? Drop me a message!</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-indigo mb-2">Let's build something together</h2>
+          <p className="text-lg text-sky-blue">Ready to collaborate? Drop me a message!</p>
         </motion.div>
         
-        <div className="contact-content grid grid-2">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           <motion.div
-            className="form-section"
+            className="w-full"
             variants={formVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
-            <form ref={formRef} onSubmit={handleSubmit} className="contact-form">
-              <div className="form-group">
-                <label htmlFor="from_name">Name</label>
+            <form ref={formRef} onSubmit={handleSubmit} className="bg-white/10 backdrop-blur-lg p-8 rounded-3xl border border-white/20 shadow-2xl transition-all duration-400 hover:border-white/40 hover:bg-white/15 hover:-translate-y-0.5">
+              <div className="mb-6">
+                <label htmlFor="from_name" className="block text-indigo font-semibold mb-2">Name</label>
                 <input 
                   type="text" 
                   id="from_name" 
                   name="from_name" 
                   required 
                   placeholder="Your name"
+                  className="w-full p-4 border border-white/30 rounded-2xl bg-white/80 backdrop-blur-sm text-indigo transition-all duration-300 shadow-md focus:outline-none focus:border-indigo focus:bg-white/90 focus:shadow-lg focus:-translate-y-px placeholder-indigo/60"
                 />
               </div>
               
-              <div className="form-group">
-                <label htmlFor="from_email">Email</label>
+              <div className="mb-6">
+                <label htmlFor="from_email" className="block text-indigo font-semibold mb-2">Email</label>
                 <input 
                   type="email" 
                   id="from_email" 
                   name="from_email" 
                   required 
                   placeholder="your.email@example.com"
+                  className="w-full p-4 border border-white/30 rounded-2xl bg-white/80 backdrop-blur-sm text-indigo transition-all duration-300 shadow-md focus:outline-none focus:border-indigo focus:bg-white/90 focus:shadow-lg focus:-translate-y-px placeholder-indigo/60"
                 />
               </div>
               
-              <div className="form-group">
-                <label htmlFor="message">Message</label>
+              <div className="mb-6">
+                <label htmlFor="message" className="block text-indigo font-semibold mb-2">Message</label>
                 <textarea 
                   id="message" 
                   name="message" 
                   required 
                   rows="5"
                   placeholder="Tell me about your project..."
+                  className="w-full p-4 border border-white/30 rounded-2xl bg-white/80 backdrop-blur-sm text-indigo transition-all duration-300 shadow-md focus:outline-none focus:border-indigo focus:bg-white/90 focus:shadow-lg focus:-translate-y-px placeholder-indigo/60"
                 ></textarea>
               </div>
               
               <motion.button 
                 type="submit" 
-                className="btn btn-primary submit-btn"
+                className="btn btn-primary w-full mt-4"
                 disabled={isSubmitting}
                 whileHover={{ scale: 1.05, boxShadow: "0 10px 25px rgba(59, 130, 246, 0.3)" }}
                 whileTap={{ scale: 0.95 }}
@@ -156,7 +157,7 @@ function ContactFormBlock() {
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1 }}
                       exit={{ opacity: 0 }}
-                      className="button-content"
+                      className="flex items-center justify-center gap-2"
                     >
                       <LoadingAnimation size={20} message="" />
                       Sending...
@@ -177,7 +178,7 @@ function ContactFormBlock() {
               <AnimatePresence>
                 {submitStatus === 'success' && (
                   <motion.div 
-                    className="status-message success"
+                    className="mt-4 p-4 rounded-lg text-center font-medium bg-green-500/10 text-green-500 border border-green-500/30"
                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -188,7 +189,7 @@ function ContactFormBlock() {
                 )}
                 {submitStatus === 'error' && (
                   <motion.div 
-                    className="status-message error"
+                    className="mt-4 p-4 rounded-lg text-center font-medium bg-red-500/10 text-red-500 border border-red-500/30"
                     initial={{ opacity: 0, y: 10, scale: 0.9 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: -10, scale: 0.9 }}
@@ -202,13 +203,13 @@ function ContactFormBlock() {
           </motion.div>
           
           <motion.div
-            className="social-section"
+            className="w-full"
             variants={socialVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
             <motion.h3 
-              className="mb-3"
+              className="text-indigo mb-8 text-2xl font-bold text-center lg:text-left"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.5, duration: 0.6 }}
@@ -216,7 +217,7 @@ function ContactFormBlock() {
               Connect with me
             </motion.h3>
             <motion.div 
-              className="social-links"
+              className="flex flex-col gap-4"
               variants={socialVariants}
             >
               {socialLinks.map((link, index) => (
@@ -225,17 +226,17 @@ function ContactFormBlock() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="social-link hover-lift"
+                  className="flex items-center gap-4 p-4 bg-white/10 backdrop-blur-md rounded-2xl text-indigo border border-white/20 shadow-lg transition-all duration-300 hover:bg-white/20 hover:border-white/40 hover:text-indigo hover:shadow-xl hover:-translate-y-1"
                   variants={socialItemVariants}
                   whileHover={{ 
-                    scale: 1.1, 
-                    rotate: 5,
+                    scale: 1.05,
+                    rotate: 2,
                     transition: { type: "spring", stiffness: 400, damping: 10 }
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="social-icon">{link.icon}</span>
-                  <span className="social-name">{link.name}</span>
+                  <span className="text-2xl">{link.icon}</span>
+                  <span className="font-medium text-lg">{link.name}</span>
                 </motion.a>
               ))}
             </motion.div>

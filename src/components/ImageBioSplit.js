@@ -1,8 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import './ImageBioSplit.css';
-
 function ImageBioSplit() {
   const [ref, inView] = useInView({
     threshold: 0.2,
@@ -83,17 +81,17 @@ function ImageBioSplit() {
   ];
 
   return (
-    <div className="image-bio-split" ref={ref}>
-      <div className="container">
-        <div className="split-content grid grid-2">
+    <div className="py-16 md:py-24" ref={ref}>
+      <div className="container mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-16">
           <motion.div 
-            className="image-section"
+            className="flex justify-center"
             variants={imageVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
             <motion.div 
-              className="profile-image-container"
+              className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden shadow-2xl transition-transform duration-300 ease-in-out hover:scale-105"
               whileHover={{ 
                 scale: 1.05, 
                 rotateY: 5,
@@ -103,7 +101,7 @@ function ImageBioSplit() {
               <motion.img 
                 src={`${process.env.PUBLIC_URL}/swastik.jpg`}
                 alt="Swastik Shetty" 
-                className="profile-image"
+                className="w-full h-full object-cover"
                 initial={{ opacity: 0, scale: 1.2 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.4, duration: 0.8 }}
@@ -112,13 +110,13 @@ function ImageBioSplit() {
           </motion.div>
           
           <motion.div 
-            className="bio-section"
+            className="text-center lg:text-left"
             variants={bioVariants}
             initial="hidden"
             animate={inView ? "visible" : "hidden"}
           >
             <motion.h2 
-              className="mb-4"
+              className="text-3xl md:text-4xl font-bold text-indigo mb-8"
               initial={{ opacity: 0, y: -20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.4, duration: 0.6 }}
@@ -126,7 +124,7 @@ function ImageBioSplit() {
               About Me
             </motion.h2>
             <motion.div 
-              className="bio-text mb-5"
+              className="text-lg leading-loose text-indigo/80 mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: 0.6, duration: 0.8 }}
@@ -140,13 +138,13 @@ function ImageBioSplit() {
             </motion.div>
             
             <motion.div 
-              className="education-timeline"
+              className=""
               variants={timelineVariants}
               initial="hidden"
               animate={inView ? "visible" : "hidden"}
             >
               <motion.h3 
-                className="mb-3"
+                className="text-2xl font-bold text-sky-blue border-b-2 border-golden pb-2 mb-8 inline-block"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={inView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ delay: 0.8, duration: 0.6 }}
@@ -156,7 +154,7 @@ function ImageBioSplit() {
               {educationData.map((item, index) => (
                 <motion.div 
                   key={index}
-                  className="timeline-item"
+                  className="bg-indigo-50/50 rounded-xl p-6 mb-4 border-l-4 border-golden transition-all duration-300 ease-in-out hover:bg-indigo-100/50 hover:translate-x-2 hover:shadow-lg"
                   variants={itemVariants}
                   whileHover={{ 
                     scale: 1.02, 
@@ -164,9 +162,9 @@ function ImageBioSplit() {
                     transition: { type: "spring", stiffness: 400, damping: 17 }
                   }}
                 >
-                  <div className="timeline-period">{item.period}</div>
-                  <div className="timeline-degree">{item.degree}</div>
-                  <div className="timeline-institution">{item.institution}</div>
+                  <div className="text-golden font-semibold text-sm bg-indigo px-3 py-1 rounded-full inline-block mb-2">{item.period}</div>
+                  <div className="text-indigo text-xl font-semibold mb-1">{item.degree}</div>
+                  <div className="text-indigo/70 text-base">{item.institution}</div>
                 </motion.div>
               ))}
             </motion.div>

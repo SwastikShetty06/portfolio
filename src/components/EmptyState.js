@@ -1,27 +1,25 @@
 import React from 'react';
 import Lottie from 'lottie-react';
 import emptyStateAnimation from '../assets/animations/empty-state.json';
-import './EmptyState.css';
-
 function EmptyState({ 
   title = "Nothing here yet", 
   message = "Check back later for updates!",
   showAnimation = true 
 }) {
   return (
-    <div className="empty-state">
+    <div className="flex flex-col items-center justify-center p-8 md:p-16 text-center min-h-[300px]">
       {showAnimation && (
-        <div className="empty-state-animation">
+        <div className="mb-8">
           <Lottie 
             animationData={emptyStateAnimation} 
-            className="empty-animation"
+            className="w-36 h-36 md:w-48 md:h-48 opacity-80"
             loop={true}
           />
         </div>
       )}
-      <div className="empty-state-content">
-        <h3 className="empty-state-title">{title}</h3>
-        <p className="empty-state-message">{message}</p>
+      <div className="max-w-md">
+        <h3 className="text-indigo text-2xl font-semibold mb-4">{title}</h3>
+        <p className="text-indigo/70 text-base leading-relaxed">{message}</p>
       </div>
     </div>
   );
